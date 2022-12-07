@@ -32,6 +32,7 @@ export class AppService {
   }
 
   async getWebhook(query: any): Promise<any> {
+    console.log(this.verify_token);
     let mode = query['hub.mode'];
     let token = query['hub.verify_token'];
     let challenge = query['hub.challenge'];
