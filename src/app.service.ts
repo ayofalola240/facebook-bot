@@ -106,7 +106,7 @@ export class AppService {
     try {
       return this.callSendAPI(sender_psid, response);
     } catch (error) {
-      console.log(error.data);
+      console.log(`An error occur ${JSON.stringify(error.data)}`);
     }
   }
 
