@@ -93,18 +93,18 @@ export class AppService {
       },
       message: response,
     };
-
+    console.log(request_body);
     // Send the HTTP request to the Messenger Platform
     try {
       const response = await axios({
         method: 'POST',
-        url: 'https://graph.facebook.com/v6.0/me/messages',
+        url: 'https://graph.facebook.com/v2.6/me/messages',
         headers: { access_token: this.page_access_token },
         data: request_body,
       });
       console.log('Response: ' + JSON.stringify(response));
     } catch (error) {
-      console.error('Unable to send message:' + error);
+      console.error(error);
       throw new BadRequestException();
     }
   }
