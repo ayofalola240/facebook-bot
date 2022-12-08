@@ -1,10 +1,19 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import axios from 'axios';
 @Injectable()
 export class AppService {
   private verify_token: string;
+  private page_access_token: string;
+
   constructor(private readonly configService: ConfigService) {
     this.verify_token = this.configService.get<string>('VERIFY_TOKEN');
+    this.page_access_token =
+      this.configService.get<string>('PAGE_ACCESS_TOKEN');
   }
   getHello(): string {
     return 'Hello World!';
@@ -22,9 +31,9 @@ export class AppService {
 
         // Handle the event based on its type
         if (webhook_event.message) {
-          // handleMessage(webhook_event);
+          this.handleMessage(sender_psid, webhook_event.message);
         } else if (webhook_event.postback) {
-          // handlePostback(webhook_event);
+          this.handlePostback(sender_psid, webhook_event.postback);
         }
       });
       return {
@@ -54,11 +63,49 @@ export class AppService {
     }
   }
   // Handles messages events
-  async handleMessage(sender_psid: any, received_message: any): Promise<any> {}
+  async handleMessage(sender_psid: any, received_message: any): Promise<any> {
+    let response: any;
+
+    // Check if the message contains text
+    if (received_message.text) {
+      // Create the payload for a basic text message
+      response = {
+        text: `You sent the message: "${received_message.text}". Now send me an image!`,
+      };
+    }
+
+    // Sends the response message
+    this.callSendAPI(sender_psid, response);
+  }
 
   // Handles messaging_postbacks events
-  async handlePostbac(sender_psid: any, received_postback: any): Promise<any> {}
+  async handlePostback(
+    sender_psid: any,
+    received_postback: any,
+  ): Promise<any> {}
 
   // Sends response messages via the Send API
-  async callSendAPI(sender_psid: any, response: any): Promise<any> {}
+  async callSendAPI(sender_psid: any, response: any): Promise<any> {
+    // Construct the message body
+    let request_body = {
+      recipient: {
+        id: sender_psid,
+      },
+      message: response,
+    };
+
+    // Send the HTTP request to the Messenger Platform
+    try {
+      const response = await axios({
+        method: 'POST',
+        url: 'https://graph.facebook.com/v6.0/me/messages',
+        headers: { access_token: this.page_access_token },
+        data: request_body,
+      });
+      console.log('Response: ' + JSON.stringify(response));
+    } catch (error) {
+      console.error('Unable to send message:' + error);
+      throw new BadRequestException();
+    }
+  }
 }
