@@ -32,7 +32,6 @@ export class AppService {
   }
 
   async getWebhook(query: any): Promise<any> {
-    console.log(this.verify_token);
     let mode = query['hub.mode'];
     let token = query['hub.verify_token'];
     let challenge = query['hub.challenge'];
@@ -43,10 +42,7 @@ export class AppService {
       if (mode === 'subscribe' && token === this.verify_token) {
         // Respond with the challenge token from the request
         console.log('WEBHOOK_VERIFIED');
-        return {
-          status: 'SUCCESS',
-          data: challenge,
-        };
+        return challenge;
       }
     } else {
       throw new NotFoundException();
