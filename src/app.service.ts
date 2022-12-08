@@ -13,13 +13,17 @@ export class AppService {
     // Handle the message, depending on its type
     if (body.object === 'page') {
       body.entry.forEach((entry: any) => {
-        const webhookEvent = entry.messaging[0];
-        console.log(webhookEvent);
+        const webhook_event = entry.messaging[0];
+        console.log(webhook_event);
+        // Get the sender PSID
+        let sender_psid = webhook_event.sender.id;
+        console.log('Sender PSID: ' + sender_psid);
+
         // Handle the event based on its type
-        if (webhookEvent.message) {
-          // handleMessage(webhookEvent);
-        } else if (webhookEvent.postback) {
-          // handlePostback(webhookEvent);
+        if (webhook_event.message) {
+          // handleMessage(webhook_event);
+        } else if (webhook_event.postback) {
+          // handlePostback(webhook_event);
         }
       });
       return {
@@ -48,4 +52,12 @@ export class AppService {
       throw new NotFoundException();
     }
   }
+  // Handles messages events
+  async handleMessage(sender_psid: any, received_message: any): Promise<any> {}
+
+  // Handles messaging_postbacks events
+  async handlePostbac(sender_psid: any, received_postback: any): Promise<any> {}
+
+  // Sends response messages via the Send API
+  async callSendAPI(sender_psid: any, response: any): Promise<any> {}
 }
