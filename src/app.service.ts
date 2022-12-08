@@ -75,7 +75,7 @@ export class AppService {
     }
 
     // Sends the response message
-    this.callSendAPI(sender_psid, response);
+    return this.callSendAPI(sender_psid, response);
   }
 
   // Handles messaging_postbacks events
@@ -99,11 +99,10 @@ export class AppService {
       const response = await axios({
         method: 'POST',
         url: 'https://graph.facebook.com/v2.6/me/messages',
-        // headers: { access_token: this.page_access_token },
         headers: { authorization: `Bearer ${this.page_access_token}` },
         data: request_body,
       });
-      console.log('Response: ' + response);
+      return response;
     } catch (error) {
       console.error(error);
       throw new BadRequestException();
