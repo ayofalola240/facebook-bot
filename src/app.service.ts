@@ -24,10 +24,9 @@ export class AppService {
     if (body.object === 'page') {
       body.entry.forEach((entry: any) => {
         const webhook_event = entry.messaging[0];
-        console.log(webhook_event);
+
         // Get the sender PSID
         let sender_psid = webhook_event.sender.id;
-        console.log('Sender PSID: ' + sender_psid);
 
         // Handle the event based on its type
         if (webhook_event.message) {
@@ -97,13 +96,14 @@ export class AppService {
     try {
       const response = await axios({
         method: 'POST',
-        url: 'https://graph.facebook.com/v2.6/me/messages',
+        url: 'https://graph.facebook.com/v6.0/me/messages',
         headers: { authorization: `Bearer ${this.page_access_token}` },
         data: request_body,
       });
       return response;
     } catch (error) {
-      throw new BadRequestException(error.data);
+      console.error(error.data);
+      throw new BadRequestException();
     }
   }
 }
