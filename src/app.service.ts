@@ -93,7 +93,6 @@ export class AppService {
       },
       message: response,
     };
-    console.log(request_body);
     // Send the HTTP request to the Messenger Platform
     try {
       const response = await axios({
@@ -104,8 +103,7 @@ export class AppService {
       });
       return response;
     } catch (error) {
-      console.error(error);
-      throw new BadRequestException();
+      throw new BadRequestException(error.data);
     }
   }
 }
