@@ -131,7 +131,7 @@ export class AppService {
       });
       return response;
     } catch (error) {
-      console.error(error);
+      console.log(JSON.stringify(error));
       throw new BadRequestException();
     }
   }
