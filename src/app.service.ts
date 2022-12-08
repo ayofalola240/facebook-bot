@@ -20,7 +20,6 @@ export class AppService {
   }
   async postWebHooks(body: any): Promise<any> {
     // Handle the message, depending on its type
-    console.log('postWebHooks');
     if (body.object === 'page') {
       body.entry.forEach((entry: any) => {
         const webhook_event = entry.messaging[0];
@@ -71,6 +70,36 @@ export class AppService {
       response = {
         text: `You sent the message: "${received_message.text}". Now send me an image!`,
       };
+    } else if (received_message.attachments) {
+      // Gets the URL of the message attachment
+      let attachment_url = received_message.attachments[0].payload.url;
+      response = {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'generic',
+            elements: [
+              {
+                title: 'Is this the right picture?',
+                subtitle: 'Tap a button to answer.',
+                image_url: attachment_url,
+                buttons: [
+                  {
+                    type: 'postback',
+                    title: 'Yes!',
+                    payload: 'yes',
+                  },
+                  {
+                    type: 'postback',
+                    title: 'No!',
+                    payload: 'no',
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      };
     }
 
     // Sends the response message
@@ -102,7 +131,7 @@ export class AppService {
       });
       return response;
     } catch (error) {
-      console.error(error.data);
+      console.error(error);
       throw new BadRequestException();
     }
   }
