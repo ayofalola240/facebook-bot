@@ -103,7 +103,7 @@ export class AppService {
         headers: { authorization: `Bearer ${this.page_access_token}` },
         data: request_body,
       });
-      console.log('Response: ' + JSON.stringify(response));
+      console.log('Response: ' + response);
     } catch (error) {
       console.error(error);
       throw new BadRequestException();
