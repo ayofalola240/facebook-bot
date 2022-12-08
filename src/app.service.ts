@@ -11,6 +11,7 @@ export class AppService {
   }
   async postWebHooks(body: any): Promise<any> {
     // Handle the message, depending on its type
+    console.log('postWebHooks');
     if (body.object === 'page') {
       body.entry.forEach((entry: any) => {
         const webhook_event = entry.messaging[0];
