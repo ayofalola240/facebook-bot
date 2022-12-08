@@ -125,7 +125,7 @@ export class AppService {
     try {
       const response = await axios({
         method: 'POST',
-        url: 'https://graph.facebook.com/v6.0/me/messages',
+        url: 'https://graph.facebook.com/v2.6/me/messages',
         headers: { authorization: `Bearer ${this.page_access_token}` },
         data: request_body,
       });
