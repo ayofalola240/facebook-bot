@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
+import request from 'request';
 @Injectable()
 export class AppService {
   private verify_token: string;
@@ -122,17 +123,36 @@ export class AppService {
       message: response,
     };
     // Send the HTTP request to the Messenger Platform
-    try {
-      const response = await axios({
+    //   try {
+    //     const response = await axios({
+    //       method: 'POST',
+    //       url: 'https://graph.facebook.com/v2.6/me/messages',
+    //       headers: {
+    //         authorization: `Bearer ${this.page_access_token}`,
+    //       },
+    //       data: request_body,
+    //     });
+    //     return response;
+    //   } catch (error) {
+    //     console.log(JSON.stringify(error));
+    //     throw new BadRequestException();
+    //   }
+
+    // Send the HTTP request to the Messenger Platform
+    request(
+      {
+        uri: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: { access_token: this.page_access_token },
         method: 'POST',
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        headers: { authorization: `Bearer ${this.page_access_token}` },
-        data: request_body,
-      });
-      return response;
-    } catch (error) {
-      console.log(JSON.stringify(error));
-      throw new BadRequestException();
-    }
+        json: request_body,
+      },
+      (err, res, body) => {
+        if (!err) {
+          console.log('message sent!');
+        } else {
+          console.error('Unable to send message:' + err);
+        }
+      },
+    );
   }
 }
