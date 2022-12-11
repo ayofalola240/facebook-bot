@@ -26,7 +26,7 @@ export class AppService {
           const webhook_event = entry.messaging[0];
 
           // Get the sender PSID
-          let sender_psid = webhook_event.sender.id;
+          const sender_psid = webhook_event.sender.id;
 
           // Handle the event based on its type
           if (webhook_event.message) {
@@ -49,9 +49,9 @@ export class AppService {
 
   async getWebhook(query: any): Promise<any> {
     try {
-      let mode = query['hub.mode'];
-      let token = query['hub.verify_token'];
-      let challenge = query['hub.challenge'];
+      const mode = query['hub.mode'];
+      const token = query['hub.verify_token'];
+      const challenge = query['hub.challenge'];
 
       // Check if a token and mode is in the query string of the request
       if (mode && token) {
@@ -81,7 +81,7 @@ export class AppService {
         };
       } else if (received_message.attachments) {
         // Gets the URL of the message attachment
-        let attachment_url = received_message.attachments[0].payload.url;
+        const attachment_url = received_message.attachments[0].payload.url;
         response = {
           attachment: {
             type: 'template',
@@ -118,16 +118,27 @@ export class AppService {
   }
 
   // Handles messaging_postbacks events
-  async handlePostback(
-    sender_psid: any,
-    received_postback: any,
-  ): Promise<any> {}
+  async handlePostback(sender_psid: any, received_postback: any): Promise<any> {
+    let response;
+
+    // Get the payload for the postback
+    const payload = received_postback.payload;
+
+    // Set the response based on the postback payload
+    if (payload === 'yes') {
+      response = { text: 'Thanks!' };
+    } else if (payload === 'no') {
+      response = { text: 'Oops, try sending another image.' };
+    }
+    // Send the message to acknowledge the postback
+    this.callSendAPI(sender_psid, response);
+  }
 
   // Sends response messages via the Send API
   async callSendAPI(sender_psid: any, response: any): Promise<any> {
     try {
       // Construct the message body
-      let request_body = {
+      const request_body = {
         recipient: {
           id: sender_psid,
         },
