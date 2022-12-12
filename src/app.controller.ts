@@ -1,19 +1,11 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Query,
-  Redirect,
-  Render,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @Get('/')
   getHello(): string {
     return this.appService.getHello();
   }
@@ -26,14 +18,14 @@ export class AppController {
     return this.appService.getWebhook(query);
   }
   @Post('/set-up-profile')
-  @Redirect('/', 200)
-  setUpProfile(@Body() body: any): any {
-    return this.appService.handleSetupProfile(body);
+  setUpProfile(@Body() body: any, @Res() res: any): any {
+    this.appService.handleSetupProfile(body);
+    return res.redirect('/');
   }
 
   @Get('/set-up-profile')
-  @Render('profile')
-  getProfile(): any {
-    return this.appService.getProfile();
+  getProfile(@Res() res: any): any {
+    this.appService.getProfile();
+    return res.render('profile');
   }
 }

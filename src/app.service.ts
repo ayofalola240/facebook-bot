@@ -151,7 +151,7 @@ export class AppService {
       });
       return res;
     } catch (error) {
-      console.log(`An error occur ${JSON.stringify(error.data)}`);
+      console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
   async handleSetupProfile(body: any): Promise<any> {
@@ -196,7 +196,7 @@ export class AppService {
             ],
           },
         ],
-        whitelisted_domains: ['https://tech-shop-haryphamdev.herokuapp.com/'],
+        whitelisted_domains: ['https://facebook-bot.herokuapp.com/'],
       };
       const res = await axios({
         method: 'POST',
@@ -205,7 +205,7 @@ export class AppService {
       });
       return res;
     } catch (error) {
-      console.error(error);
+      console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
   async getProfile(): Promise<any> {
