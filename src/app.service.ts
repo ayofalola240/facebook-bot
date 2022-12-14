@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
+import request from 'request';
 @Injectable()
 export class AppService {
   private verify_token: string;
@@ -196,22 +197,39 @@ export class AppService {
             ],
           },
         ],
-        whitelisted_domains: ['https://facebook-bot.herokuapp.com/'],
+        whitelisted_domains: ['https://facebook-bot.herokuapp.com'],
       };
       const res = await axios({
         method: 'POST',
-        url: `https://graph.facebook.com/v15.0/me/messenger_profile`,
+        url: 'https://graph.facebook.com/v15.0/me/messenger_profile',
         headers: {
           authorization: `Bearer ${this.page_access_token}`,
         },
         data: request_body,
       });
+      console.log(res);
       return res;
     } catch (error) {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
   async getProfile(): Promise<any> {
+    // const url = `https://graph.facebook.com/v7.0/me/messenger_profile?access_token=${this.page_access_token}`;
+    // request(
+    //   {
+    //     uri: url,
+    //     method: 'POST',
+    //     json: {},
+    //   },
+    //   (err: any, res: any, body: any) => {
+    //     console.log(res);
+    //     if (!err) {
+    //       console.log('Done!');
+    //     } else {
+    //       console.log('Unable to send message:' + err);
+    //     }
+    //   },
+    // );
     return {
       message: 'Profile',
     };
