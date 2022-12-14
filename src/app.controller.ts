@@ -18,8 +18,8 @@ export class AppController {
     return this.appService.getWebhook(query);
   }
   @Post('/set-up-profile')
-  setUpProfile(@Body() body: any, @Res() res: any): any {
-    this.appService.handleSetupProfile(body);
+  setUpProfile(@Res() res: any): any {
+    this.appService.handleSetupProfile();
     return res.redirect('/');
   }
 

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
-import request from 'request';
+
 @Injectable()
 export class AppService {
   private verify_token: string;
@@ -155,7 +155,7 @@ export class AppService {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
-  async handleSetupProfile(body: any): Promise<any> {
+  async handleSetupProfile(): Promise<any> {
     try {
       const request_body = {
         get_started: {
