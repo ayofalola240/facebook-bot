@@ -6,8 +6,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('/')
-  getHello(): string {
-    return this.appService.getHello();
+  getHello(@Res() res: any): any {
+    return res.render('homepage');
   }
   @Post('/webhook')
   postWebHooks(@Body() body: any): any {
@@ -25,7 +25,7 @@ export class AppController {
 
   @Get('/set-up-profile')
   getProfile(@Res() res: any): any {
-    this.appService.getProfile();
+    // this.appService.getProfile();
     return res.render('profile');
   }
 }

@@ -12,9 +12,7 @@ export class AppService {
     this.page_access_token =
       this.configService.get<string>('PAGE_ACCESS_TOKEN');
   }
-  getHello(): string {
-    return 'Hello World!';
-  }
+
   async postWebHooks(body: any): Promise<any> {
     // Handle the message, depending on its type
     try {
@@ -213,25 +211,5 @@ export class AppService {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
-  async getProfile(): Promise<any> {
-    // const url = `https://graph.facebook.com/v7.0/me/messenger_profile?access_token=${this.page_access_token}`;
-    // request(
-    //   {
-    //     uri: url,
-    //     method: 'POST',
-    //     json: {},
-    //   },
-    //   (err: any, res: any, body: any) => {
-    //     console.log(res);
-    //     if (!err) {
-    //       console.log('Done!');
-    //     } else {
-    //       console.log('Unable to send message:' + err);
-    //     }
-    //   },
-    // );
-    return {
-      message: 'Profile',
-    };
-  }
+  // async getProfile(): Promise<any> {}
 }
