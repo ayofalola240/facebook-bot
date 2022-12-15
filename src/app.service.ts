@@ -120,7 +120,7 @@ export class AppService {
         `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${this.page_access_token}`,
       );
       const { data } = res;
-      const userName = `${data.last_name} | ${data.first_name}`;
+      const userName = `${data.last_name} ${data.first_name}`;
       return userName;
     } catch (error) {
       console.log(`An err occur ${JSON.stringify(error)}`);
