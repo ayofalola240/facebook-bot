@@ -121,11 +121,18 @@ export class AppService {
     // Get the payload for the postback
     const payload = received_postback.payload;
 
-    // Set the response based on the postback payload
-    if (payload === 'yes') {
-      response = { text: 'Thanks!' };
-    } else if (payload === 'no') {
-      response = { text: 'Oops, try sending another image.' };
+    switch (payload) {
+      case 'yes':
+        response = { text: 'Thanks!' };
+        break;
+      case 'no':
+        response = { text: 'Oops, try sending another image.' };
+        break;
+      case 'GET_STARTED':
+        response = { text: 'Hi, welcome to my clothing shop' };
+        break;
+      default:
+        console.log('run default switch case');
     }
     // Send the message to acknowledge the postback
     this.callSendAPI(sender_psid, response);
