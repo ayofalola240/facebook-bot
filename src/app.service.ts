@@ -169,42 +169,36 @@ export class AppService {
             text: 'Timeless apparel for the masses.',
           },
         ],
-        // persistent_menu: [
-        //   {
-        //     locale: 'default',
-        //     composer_input_disabled: false,
-        //     call_to_actions: [
-        //       {
-        //         type: 'postback',
-        //         title: 'Talk to an agent',
-        //         payload: 'TALK_AGENT',
-        //       },
-        //       {
-        //         type: 'postback',
-        //         title: 'Restart this conversation',
-        //         payload: 'RESTART_CONVERSATION',
-        //       },
-        //       {
-        //         type: 'nested',
-        //         title: 'More info',
-        //         call_to_actions: [
-        //           {
-        //             type: 'web_url',
-        //             title: 'View Facebook Fan Page',
-        //             url: 'https://www.facebook.com/haryphamdev',
-        //             webview_height_ratio: 'full',
-        //           },
-        //           {
-        //             type: 'web_url',
-        //             title: 'View Youtube channel',
-        //             url: 'https://bit.ly/subscribe-haryphamdev',
-        //             webview_height_ratio: 'full',
-        //           },
-        //         ],
-        //       },
-        //     ],
-        //   },
-        // ],
+        persistent_menu: [
+          {
+            locale: 'default',
+            composer_input_disabled: false,
+            call_to_actions: [
+              {
+                type: 'postback',
+                title: 'Talk to an agent',
+                payload: 'TALK_AGENT',
+              },
+              {
+                type: 'postback',
+                title: 'Restart this conversation',
+                payload: 'RESTART_CONVERSATION',
+              },
+              {
+                type: 'nested',
+                title: 'More info',
+                call_to_actions: [
+                  {
+                    type: 'web_url',
+                    title: 'View Facebook Fan Page',
+                    url: 'https://web.facebook.com/ayofalola240',
+                    webview_height_ratio: 'full',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
         whitelisted_domains: ['https://facebook-bot.herokuapp.com'],
       };
       const res = await axios({
@@ -215,7 +209,7 @@ export class AppService {
         },
         data: request_body,
       });
-      console.log(res);
+
       return res;
     } catch (error) {
       console.log(`An error occur ${JSON.stringify(error)}`);
