@@ -169,24 +169,6 @@ export class AppService {
             text: 'Timeless apparel for the masses.',
           },
         ],
-        // persistent_menu: [
-        //   {
-        //     locale: 'default',
-        //     composer_input_disabled: false,
-        //     call_to_actions: [
-        //       {
-        //         type: 'postback',
-        //         title: 'Talk to an agent',
-        //         payload: 'TALK_AGENT',
-        //       },
-        //       {
-        //         type: 'postback',
-        //         title: 'Restart this conversation',
-        //         payload: 'RESTART_CONVERSATION',
-        //       },
-        //     ],
-        //   },
-        // ],
         persistent_menu: [
           {
             locale: 'default',
@@ -195,18 +177,12 @@ export class AppService {
               {
                 type: 'postback',
                 title: 'Talk to an agent',
-                payload: 'CARE_HELP',
+                payload: 'TALK_AGENT',
               },
               {
                 type: 'postback',
-                title: 'Outfit suggestions',
-                payload: 'CURATION',
-              },
-              {
-                type: 'web_url',
-                title: 'Shop now',
-                url: 'https://www.originalcoastclothing.com/',
-                webview_height_ratio: 'full',
+                title: 'Restart this conversation',
+                payload: 'RESTART_CONVERSATION',
               },
             ],
           },
