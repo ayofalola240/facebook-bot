@@ -116,10 +116,10 @@ export class AppService {
   async getUserName(sender_psid: any): Promise<string> {
     console.log('Gettings profile with sender: ' + sender_psid);
     try {
-      const data: any = await axios.get(
+      const res: any = await axios.get(
         `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${this.page_access_token}`,
       );
-      console.log(data);
+      const { data } = res;
       const userName = `${data.last_name} | ${data.first_name}`;
       return userName;
     } catch (error) {
