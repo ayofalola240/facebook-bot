@@ -159,47 +159,57 @@ export class AppService {
         get_started: {
           payload: 'GET_STARTED',
         },
-        persistent_menu: [
+        greeting: [
           {
             locale: 'default',
-            composer_input_disabled: false,
-            call_to_actions: [
-              {
-                type: 'postback',
-                title: 'Talk to an agent',
-                payload: 'TALK_AGENT',
-              },
-              {
-                type: 'postback',
-                title: 'Restart this conversation',
-                payload: 'RESTART_CONVERSATION',
-              },
-              {
-                type: 'nested',
-                title: 'More info',
-                call_to_actions: [
-                  {
-                    type: 'web_url',
-                    title: 'View Facebook Fan Page',
-                    url: 'https://www.facebook.com/haryphamdev',
-                    webview_height_ratio: 'full',
-                  },
-                  {
-                    type: 'web_url',
-                    title: 'View Youtube channel',
-                    url: 'https://bit.ly/subscribe-haryphamdev',
-                    webview_height_ratio: 'full',
-                  },
-                ],
-              },
-            ],
+            text: 'Hello!',
+          },
+          {
+            locale: 'en_US',
+            text: 'Timeless apparel for the masses.',
           },
         ],
+        // persistent_menu: [
+        //   {
+        //     locale: 'default',
+        //     composer_input_disabled: false,
+        //     call_to_actions: [
+        //       {
+        //         type: 'postback',
+        //         title: 'Talk to an agent',
+        //         payload: 'TALK_AGENT',
+        //       },
+        //       {
+        //         type: 'postback',
+        //         title: 'Restart this conversation',
+        //         payload: 'RESTART_CONVERSATION',
+        //       },
+        //       {
+        //         type: 'nested',
+        //         title: 'More info',
+        //         call_to_actions: [
+        //           {
+        //             type: 'web_url',
+        //             title: 'View Facebook Fan Page',
+        //             url: 'https://www.facebook.com/haryphamdev',
+        //             webview_height_ratio: 'full',
+        //           },
+        //           {
+        //             type: 'web_url',
+        //             title: 'View Youtube channel',
+        //             url: 'https://bit.ly/subscribe-haryphamdev',
+        //             webview_height_ratio: 'full',
+        //           },
+        //         ],
+        //       },
+        //     ],
+        //   },
+        // ],
         whitelisted_domains: ['https://facebook-bot.herokuapp.com'],
       };
       const res = await axios({
         method: 'POST',
-        url: 'https://graph.facebook.com/v15.0/me/messenger_profile',
+        url: 'https://graph.facebook.com/v2.6/me/messenger_profile',
         headers: {
           authorization: `Bearer ${this.page_access_token}`,
         },
