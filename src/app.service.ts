@@ -115,18 +115,14 @@ export class AppService {
   }
   async getUserName(sender_psid: any): Promise<string> {
     try {
-      const res: any = await axios({
-        method: 'GET',
-        url: `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic`,
-        headers: {
-          authorization: `Bearer ${this.page_access_token}`,
-        },
-      });
-      console.log(res);
-      const userName = `${res.last_name} ${res.first_name}`;
+      const data: any = await axios.get(
+        `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${this.page_access_token}`,
+      );
+      console.log(data);
+      const userName = `${data.last_name} ${data.first_name}`;
       return userName;
     } catch (error) {
-      console.log(`An error occur ${JSON.stringify(error)}`);
+      console.log(`An err occur ${JSON.stringify(error)}`);
     }
   }
   // Handles messaging_postbacks events
