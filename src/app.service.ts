@@ -6,11 +6,13 @@ import axios from 'axios';
 export class AppService {
   private verify_token: string;
   private page_access_token: string;
+  private pageID: string;
 
   constructor(private readonly configService: ConfigService) {
     this.verify_token = this.configService.get<string>('VERIFY_TOKEN');
     this.page_access_token =
       this.configService.get<string>('PAGE_ACCESS_TOKEN');
+    this.pageID = this.configService.get<string>('PAGE_ID');
   }
 
   async postWebHooks(body: any): Promise<any> {
@@ -154,7 +156,6 @@ export class AppService {
     }
   }
   async handleSetupProfile(): Promise<any> {
-    const pageID = 102407709389225;
     try {
       const request_body = {
         get_started: {
@@ -192,7 +193,7 @@ export class AppService {
       };
       const res = await axios({
         method: 'POST',
-        url: `https://graph.facebook.com/v2.6/${pageID}/messenger_profile`,
+        url: `https://graph.facebook.com/v2.6/${this.pageID}/messenger_profile`,
         headers: {
           authorization: `Bearer ${this.page_access_token}`,
         },
