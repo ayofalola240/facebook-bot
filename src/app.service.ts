@@ -117,8 +117,12 @@ export class AppService {
     try {
       const res: any = await axios({
         method: 'GET',
-        url: `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${this.page_access_token}`,
+        url: `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic`,
+        headers: {
+          authorization: `Bearer ${this.page_access_token}`,
+        },
       });
+      console.log(res);
       const userName = `${res.last_name} ${res.first_name}`;
       return userName;
     } catch (error) {
