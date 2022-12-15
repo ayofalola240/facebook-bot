@@ -113,10 +113,21 @@ export class AppService {
       console.error(error);
     }
   }
-
+  async getUserName(sender_psid: any): Promise<string> {
+    try {
+      const res: any = await axios({
+        method: 'GET',
+        url: `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${this.page_access_token}`,
+      });
+      const userName = `${res.last_name} ${res.first_name}`;
+      return userName;
+    } catch (error) {
+      console.log(`An error occur ${JSON.stringify(error)}`);
+    }
+  }
   // Handles messaging_postbacks events
   async handlePostback(sender_psid: any, received_postback: any): Promise<any> {
-    let response;
+    let response = {};
 
     // Get the payload for the postback
     const payload = received_postback.payload;
@@ -129,7 +140,8 @@ export class AppService {
         response = { text: 'Oops, try sending another image.' };
         break;
       case 'GET_STARTED':
-        response = { text: 'Hi, welcome to my clothing shop' };
+        const userName = await this.getUserName(sender_psid);
+        response = { text: `Hi ${userName}, welcome to my clothing shop` };
         break;
       default:
         console.log('run default switch case');
