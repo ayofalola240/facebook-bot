@@ -153,7 +153,8 @@ export class AppService {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
-  async handleSetupProfile(): Promise<any> {
+  async handleSetupProfile(body: any): Promise<any> {
+    console.log(body);
     try {
       const request_body = {
         get_started: {
