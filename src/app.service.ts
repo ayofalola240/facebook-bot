@@ -184,18 +184,6 @@ export class AppService {
                 title: 'Restart this conversation',
                 payload: 'RESTART_CONVERSATION',
               },
-              {
-                type: 'nested',
-                title: 'More info',
-                call_to_actions: [
-                  {
-                    type: 'web_url',
-                    title: 'View Facebook Fan Page',
-                    url: 'https://web.facebook.com/ayofalola240',
-                    webview_height_ratio: 'full',
-                  },
-                ],
-              },
             ],
           },
         ],
