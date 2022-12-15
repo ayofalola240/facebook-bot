@@ -153,8 +153,8 @@ export class AppService {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
-  async handleSetupProfile(body: any): Promise<any> {
-    console.log(body);
+  async handleSetupProfile(): Promise<any> {
+    const pageID = 102407709389225;
     try {
       const request_body = {
         get_started: {
@@ -192,7 +192,7 @@ export class AppService {
       };
       const res = await axios({
         method: 'POST',
-        url: 'https://graph.facebook.com/v2.6/me/messenger_profile',
+        url: `https://graph.facebook.com/v2.6/${pageID}/messenger_profile`,
         headers: {
           authorization: `Bearer ${this.page_access_token}`,
         },
