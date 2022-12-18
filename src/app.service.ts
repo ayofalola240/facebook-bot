@@ -79,13 +79,13 @@ export class AppService {
         received_message.quick_reply.payload
       ) {
         const payload = received_message.quick_reply.payload;
-        if (payload === 'CATEGORIES') {
-          await this.chatService.sendCategories(sender_psid);
-        } else if (payload === 'LOOKUP_ORDER') {
-          await this.chatService.sendLookupOrder(sender_psid);
-        } else if (payload === 'TALK_AGENT') {
-          await this.chatService.requestTalkToAgent(sender_psid);
-        }
+        // if (payload === 'CATEGORIES') {
+        //   await this.chatService.sendCategories(sender_psid);
+        // } else if (payload === 'LOOKUP_ORDER') {
+        //   await this.chatService.sendLookupOrder(sender_psid);
+        // } else if (payload === 'TALK_AGENT') {
+        //   await this.chatService.requestTalkToAgent(sender_psid);
+        // }
         return;
       }
       let response: any;

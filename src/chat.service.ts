@@ -1,7 +1,7 @@
 import { Injectable, forwardRef, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AppService } from './app.service';
-import * as Templetes from '../utils/messageTemplete';
+import * as Templetes from './utils/messageTemplete';
 import axios from 'axios';
 
 @Injectable()
@@ -99,6 +99,6 @@ export class ChatService {
     }
   }
   //
-  async sendLookupOrder(sender_psid: any): Promise<any> {}
-  async requestTalkToAgent(sender_psid: any): Promise<any> {}
+  //   async sendLookupOrder(sender_psid: any): Promise<any> {}
+  //   async requestTalkToAgent(sender_psid: any): Promise<any> {}
 }
