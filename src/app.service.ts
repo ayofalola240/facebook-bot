@@ -215,10 +215,7 @@ export class AppService {
       };
       const res = await axios({
         method: 'POST',
-        url: `https://graph.facebook.com/v2.6/${this.pageID}/messages`,
-        headers: {
-          authorization: `Bearer ${this.page_access_token}`,
-        },
+        url: `https://graph.facebook.com/v2.6/${this.pageID}/messenger_profile?access_token=${this.page_access_token}`,
         data: request_body,
       });
 
@@ -239,10 +236,7 @@ export class AppService {
 
       const res = await axios({
         method: 'POST',
-        url: `https://graph.facebook.com/v2.6/${this.pageID}/messages`,
-        headers: {
-          authorization: `Bearer ${this.page_access_token}`,
-        },
+        url: `https://graph.facebook.com/v2.6/${this.pageID}/messenger_profile?access_token=${this.page_access_token}`,
         data: request_body,
       });
       console.log(res);
