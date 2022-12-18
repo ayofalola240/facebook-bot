@@ -112,7 +112,6 @@ export class AppService {
         };
       }
       // Sends the response message
-      // return this.callSendAPI(sender_psid, response);
       return this.chatService.sendMessage(sender_psid, response);
     } catch (error) {
       console.error(error);
@@ -146,6 +145,7 @@ export class AppService {
         response = { text: 'Oops, try sending another image.' };
         break;
       case 'GET_STARTED':
+        await this.chatService.sendWelcomeMessage(sender_psid);
         const userName = await this.getUserName(sender_psid);
         response = { text: `Hi ${userName}, welcome to my clothing shop` };
         break;
@@ -153,36 +153,9 @@ export class AppService {
         console.log('run default switch case');
     }
     // Send the message to acknowledge the postback
-    // this.callSendAPI(sender_psid, response);
     return this.chatService.sendMessage(sender_psid, response);
   }
 
-  // Sends response messages via the Send API
-  async callSendAPI(sender_psid: any, response: any): Promise<any> {
-    try {
-      this.markMessageRead(sender_psid);
-      this.sendTypingOn(sender_psid);
-      // Construct the message body
-      const request_body = {
-        recipient: {
-          id: sender_psid,
-        },
-        message: response,
-      };
-      // Send the HTTP request to the Messenger Platform
-      const res = await axios({
-        method: 'POST',
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        headers: {
-          authorization: `Bearer ${this.page_access_token}`,
-        },
-        data: request_body,
-      });
-      return res;
-    } catch (error) {
-      console.log(`An error occur ${JSON.stringify(error)}`);
-    }
-  }
   async handleSetupProfile(): Promise<any> {
     try {
       const request_body = {
@@ -279,5 +252,4 @@ export class AppService {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
-  // async getProfile(): Promise<any> {}
 }
