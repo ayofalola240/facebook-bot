@@ -1,7 +1,9 @@
 import axios from 'axios';
 export const sendCategoriesTemplate = async () => {
   let products = [];
-  products = await axios.get('https://fakestoreapi.com/products');
+  const res: any = await axios.get('https://fakestoreapi.com/products');
+  console.log(JSON.stringify(res));
+  products = res.data;
   const elements = products.map((product) => {
     return {
       title: product.title,
