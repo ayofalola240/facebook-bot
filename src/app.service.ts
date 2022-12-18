@@ -225,5 +225,51 @@ export class AppService {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
+
+  async sendTypingOn(sender_psid: any): Promise<any> {
+    try {
+      const request_body = {
+        recipient: {
+          id: sender_psid,
+        },
+        sender_action: 'typing_on',
+      };
+
+      const res = await axios({
+        method: 'POST',
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        headers: {
+          authorization: `Bearer ${this.page_access_token}`,
+        },
+        data: request_body,
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(`An error occur ${JSON.stringify(error)}`);
+    }
+  }
+
+  async markMessageRead(sender_psid: any): Promise<any> {
+    try {
+      const request_body = {
+        recipient: {
+          id: sender_psid,
+        },
+        sender_action: 'mark_seen',
+      };
+
+      const res = await axios({
+        method: 'POST',
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        headers: {
+          authorization: `Bearer ${this.page_access_token}`,
+        },
+        data: request_body,
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(`An error occur ${JSON.stringify(error)}`);
+    }
+  }
   // async getProfile(): Promise<any> {}
 }
