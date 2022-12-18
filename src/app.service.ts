@@ -154,6 +154,8 @@ export class AppService {
   // Sends response messages via the Send API
   async callSendAPI(sender_psid: any, response: any): Promise<any> {
     try {
+      this.markMessageRead(sender_psid);
+      this.sendTypingOn(sender_psid);
       // Construct the message body
       const request_body = {
         recipient: {
