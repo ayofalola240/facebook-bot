@@ -239,7 +239,7 @@ export class AppService {
 
       const res = await axios({
         method: 'POST',
-        url: 'https://graph.facebook.com/v2.6/me/messages',
+        url: `https://graph.facebook.com/v2.6/${this.pageID}/messages`,
         headers: {
           authorization: `Bearer ${this.page_access_token}`,
         },
@@ -262,7 +262,7 @@ export class AppService {
 
       const res = await axios({
         method: 'POST',
-        url: 'https://graph.facebook.com/v2.6/me/messages',
+        url: `https://graph.facebook.com/v2.6/${this.pageID}/messages`,
         headers: {
           authorization: `Bearer ${this.page_access_token}`,
         },
