@@ -72,6 +72,22 @@ export class AppService {
   // Handles messages events
   async handleMessage(sender_psid: any, received_message: any): Promise<any> {
     try {
+      //check the incoming message is a quick reply?
+      if (
+        received_message &&
+        received_message.quick_reply &&
+        received_message.quick_reply.payload
+      ) {
+        const payload = received_message.quick_reply.payload;
+        if (payload === 'CATEGORIES') {
+          await this.chatService.sendCategories(sender_psid);
+        } else if (payload === 'LOOKUP_ORDER') {
+          await this.chatService.sendLookupOrder(sender_psid);
+        } else if (payload === 'TALK_AGENT') {
+          await this.chatService.requestTalkToAgent(sender_psid);
+        }
+        return;
+      }
       let response: any;
 
       // Check if the message contains text
@@ -146,15 +162,9 @@ export class AppService {
         break;
       case 'GET_STARTED':
         await this.chatService.sendWelcomeMessage(sender_psid);
-        // const userName = await this.getUserName(sender_psid);
-        // response = { text: `Hi ${userName}, welcome to my clothing shop` };
         break;
       default:
         console.log('run default switch case');
-    }
-    // Send the message to acknowledge the postback
-    if (response) {
-      return this.chatService.sendMessage(sender_psid, response);
     }
   }
 
