@@ -154,8 +154,8 @@ export class AppService {
   // Sends response messages via the Send API
   async callSendAPI(sender_psid: any, response: any): Promise<any> {
     try {
-      // this.markMessageRead(sender_psid);
-      // this.sendTypingOn(sender_psid);
+      this.markMessageRead(sender_psid);
+      this.sendTypingOn(sender_psid);
       // Construct the message body
       const request_body = {
         recipient: {
@@ -215,7 +215,10 @@ export class AppService {
       };
       const res = await axios({
         method: 'POST',
-        url: `https://graph.facebook.com/v2.6/${this.pageID}/messenger_profile?access_token=${this.page_access_token}`,
+        url: `https://graph.facebook.com/v2.6/${this.pageID}/messenger_profile`,
+        headers: {
+          authorization: `Bearer ${this.page_access_token}`,
+        },
         data: request_body,
       });
 
@@ -236,7 +239,10 @@ export class AppService {
 
       const res = await axios({
         method: 'POST',
-        url: `https://graph.facebook.com/v2.6/${this.pageID}/messenger_profile?access_token=${this.page_access_token}`,
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        headers: {
+          authorization: `Bearer ${this.page_access_token}`,
+        },
         data: request_body,
       });
       console.log(res);
@@ -256,7 +262,7 @@ export class AppService {
 
       const res = await axios({
         method: 'POST',
-        url: `https://graph.facebook.com/v2.6/${this.pageID}/messages`,
+        url: 'https://graph.facebook.com/v2.6/me/messages',
         headers: {
           authorization: `Bearer ${this.page_access_token}`,
         },
