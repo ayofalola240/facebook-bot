@@ -1,9 +1,14 @@
 import axios from 'axios';
 export const sendCategoriesTemplate = async () => {
   let products = [];
-  const res: any = await axios.get('https://fakestoreapi.com/products');
-  console.log(JSON.stringify(res));
-  products = res.data;
+  try {
+    const res: any = await axios.get('https://fakestoreapi.com/products');
+    console.log(JSON.stringify(res));
+    products = res.data;
+  } catch (error) {
+    console.log(`An error occur in api ${JSON.stringify(error)}`);
+  }
+
   const elements = products.map((product) => {
     return {
       title: product.title,
