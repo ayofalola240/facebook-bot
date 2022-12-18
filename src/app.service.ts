@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { ChatService } from './chat.service';
 import axios from 'axios';
 
 @Injectable()
@@ -8,7 +9,10 @@ export class AppService {
   private page_access_token: string;
   private pageID: string;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly chatService: ChatService,
+  ) {
     this.verify_token = this.configService.get<string>('VERIFY_TOKEN');
     this.page_access_token =
       this.configService.get<string>('PAGE_ACCESS_TOKEN');
@@ -108,7 +112,8 @@ export class AppService {
         };
       }
       // Sends the response message
-      return this.callSendAPI(sender_psid, response);
+      // return this.callSendAPI(sender_psid, response);
+      return this.chatService.sendMessage(sender_psid, response);
     } catch (error) {
       console.error(error);
     }
@@ -148,7 +153,8 @@ export class AppService {
         console.log('run default switch case');
     }
     // Send the message to acknowledge the postback
-    this.callSendAPI(sender_psid, response);
+    // this.callSendAPI(sender_psid, response);
+    return this.chatService.sendMessage(sender_psid, response);
   }
 
   // Sends response messages via the Send API
