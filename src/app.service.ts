@@ -146,14 +146,16 @@ export class AppService {
         break;
       case 'GET_STARTED':
         await this.chatService.sendWelcomeMessage(sender_psid);
-        const userName = await this.getUserName(sender_psid);
-        response = { text: `Hi ${userName}, welcome to my clothing shop` };
+        // const userName = await this.getUserName(sender_psid);
+        // response = { text: `Hi ${userName}, welcome to my clothing shop` };
         break;
       default:
         console.log('run default switch case');
     }
     // Send the message to acknowledge the postback
-    return this.chatService.sendMessage(sender_psid, response);
+    if (response) {
+      return this.chatService.sendMessage(sender_psid, response);
+    }
   }
 
   async handleSetupProfile(): Promise<any> {

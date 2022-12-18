@@ -45,7 +45,7 @@ export class ChatService {
       const username = await this.appService.getUserName(sender_psid);
       //send text message
       const response1 = {
-        text: `Hi ${username}! Welcome to Tech Shop Haryphamdev, where you will find what you need.`,
+        text: `Hi ${username}! welcome to my clothing shop.`,
       };
 
       //send an image
