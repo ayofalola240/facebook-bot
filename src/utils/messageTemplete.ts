@@ -35,7 +35,7 @@ export const sendCategoriesTemplate = async () => {
         ],
       };
     })
-    .slice(0, 2);
+    .slice(0, 3);
   const template = {
     attachment: {
       type: 'template',
