@@ -92,7 +92,7 @@ export class ChatService {
   }
   async sendCategories(sender_psid: any): Promise<any> {
     try {
-      const response = Templetes.sendCategoriesTemplate();
+      const response = await Templetes.sendCategoriesTemplate();
       await this.sendMessage(sender_psid, response);
     } catch (error) {
       console.log(`An error occur ${JSON.stringify(error)}`);

@@ -236,7 +236,6 @@ export class AppService {
         },
         data: request_body,
       });
-      console.log(res);
     } catch (error) {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
@@ -259,7 +258,6 @@ export class AppService {
         },
         data: request_body,
       });
-      console.log(res);
     } catch (error) {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
