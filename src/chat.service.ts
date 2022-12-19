@@ -67,8 +67,8 @@ export class ChatService {
         quick_replies: [
           {
             content_type: 'text',
-            title: 'Categories',
-            payload: 'CATEGORIES',
+            title: 'All products',
+            payload: 'ALL_PRODUCTS',
           },
           {
             content_type: 'text',
@@ -90,9 +90,9 @@ export class ChatService {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
-  async sendCategories(sender_psid: any): Promise<any> {
+  async sendProducts(sender_psid: any): Promise<any> {
     try {
-      const response = await Templetes.sendCategoriesTemplate();
+      const response = await Templetes.sendProductsTemplate();
       await this.sendMessage(sender_psid, response);
     } catch (error) {
       console.log(`An error occur ${JSON.stringify(error)}`);
