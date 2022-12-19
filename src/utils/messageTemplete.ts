@@ -34,8 +34,7 @@ export const sendCategoriesTemplate = async () => {
       ],
     };
   });
-
-  return {
+  const template = {
     attachment: {
       type: 'template',
       payload: {
@@ -44,4 +43,6 @@ export const sendCategoriesTemplate = async () => {
       },
     },
   };
+
+  return JSON.stringify(template);
 };
