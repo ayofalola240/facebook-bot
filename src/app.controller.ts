@@ -12,6 +12,7 @@ export class AppController {
   @Get('/')
   getHello(@Res() res: any): any {
     return res.render('homepage');
+    // return this.chatService.sendCategories(1111);
   }
   @Post('/webhook')
   postWebHooks(@Body() body: any): any {

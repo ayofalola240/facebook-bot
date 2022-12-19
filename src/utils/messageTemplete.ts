@@ -15,25 +15,27 @@ export const sendCategoriesTemplate = async () => {
     console.log(`An error occur in api ${JSON.stringify(error)}`);
   }
 
-  const elements = products.map((product) => {
-    return {
-      title: product.title,
-      image: product.image,
-      subtitle: product.description,
-      default_action: {
-        type: 'web_url',
-        url: `https://fakestoreapi.com/products/${product.id}`,
-        webview_height_ratio: 'tall',
-      },
-      buttons: [
-        {
+  const elements = products
+    .map((product) => {
+      return {
+        title: product.title,
+        image_url: product.image,
+        subtitle: product.description,
+        default_action: {
           type: 'web_url',
-          url: 'https://bit.ly/webHeadphones',
-          title: 'Add to cart',
+          url: `https://fakestoreapi.com/products/${product.id}`,
+          webview_height_ratio: 'tall',
         },
-      ],
-    };
-  });
+        buttons: [
+          {
+            type: 'web_url',
+            url: 'https://bit.ly/webHeadphones',
+            title: 'Add to cart',
+          },
+        ],
+      };
+    })
+    .slice(0, 2);
   const template = {
     attachment: {
       type: 'template',
