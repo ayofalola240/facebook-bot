@@ -67,7 +67,7 @@ export class ChatService {
         quick_replies: [
           {
             content_type: 'text',
-            title: 'All products',
+            title: 'Products',
             payload: 'PRODUCTS',
           },
           {
