@@ -68,7 +68,7 @@ export class ChatService {
           {
             content_type: 'text',
             title: 'All products',
-            payload: 'ALL_PRODUCTS',
+            payload: 'PRODUCTS',
           },
           {
             content_type: 'text',

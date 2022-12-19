@@ -79,7 +79,7 @@ export class AppService {
         received_message.quick_reply.payload
       ) {
         const payload = received_message.quick_reply.payload;
-        if (payload === 'ALL_PRODUCTS') {
+        if (payload === 'PRODUCTS') {
           await this.chatService.sendProducts(sender_psid);
         } else if (payload === 'LOOKUP_ORDER') {
           await this.chatService.sendLookupOrder(sender_psid);
