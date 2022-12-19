@@ -1,13 +1,18 @@
 import { Body, Controller, Get, Post, Query, Res } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ChatService } from './chat.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly chatService: ChatService,
+  ) {}
 
   @Get('/')
   getHello(@Res() res: any): any {
-    return res.render('homepage');
+    // return res.render('homepage');
+    return this.chatService.sendCategories(1111);
   }
   @Post('/webhook')
   postWebHooks(@Body() body: any): any {

@@ -2,8 +2,14 @@ import axios from 'axios';
 export const sendCategoriesTemplate = async () => {
   let products = [];
   try {
-    const res: any = await axios.get('https://fakestoreapi.com/products');
-    console.log(JSON.stringify(res));
+    const res: any = await axios({
+      url: 'https://fakestoreapi.com/products',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept-Encoding': '*',
+      },
+    });
     products = res.data;
   } catch (error) {
     console.log(`An error occur in api ${JSON.stringify(error)}`);
@@ -38,80 +44,4 @@ export const sendCategoriesTemplate = async () => {
       },
     },
   };
-  // return {
-  //   attachment: {
-  //     type: 'template',
-  //     payload: {
-  //       template_type: 'generic',
-  //       elements: [
-  //         {
-  //           title: 'Headphones',
-  //           image_url: 'https://bit.ly/imageHeadphones',
-  //           subtitle: 'Bose Noise Cancelling Wireless Bluetooth Headphones',
-  //           default_action: {
-  //             type: 'web_url',
-  //             url: 'https://bit.ly/webHeadphones',
-  //             webview_height_ratio: 'tall',
-  //           },
-  //           buttons: [
-  //             {
-  //               type: 'web_url',
-  //               url: 'https://bit.ly/webHeadphones',
-  //               title: 'View on Website',
-  //             },
-  //             {
-  //               type: 'postback',
-  //               title: 'Show Headphones',
-  //               payload: 'SHOW_HEADPHONES',
-  //             },
-  //           ],
-  //         },
-  //         {
-  //           title: 'TV',
-  //           image_url: 'https://bit.ly/imageTV',
-  //           subtitle: 'Master of quality & Incredible clarity',
-  //           default_action: {
-  //             type: 'web_url',
-  //             url: 'https://bit.ly/webTelevision',
-  //             webview_height_ratio: 'tall',
-  //           },
-  //           buttons: [
-  //             {
-  //               type: 'web_url',
-  //               url: 'https://bit.ly/webTelevision',
-  //               title: 'View on Website',
-  //             },
-  //             {
-  //               type: 'postback',
-  //               title: 'Show TVs',
-  //               payload: 'SHOW_TV',
-  //             },
-  //           ],
-  //         },
-  //         {
-  //           title: 'Playstation',
-  //           image_url: 'https://bit.ly/imagePlaystation',
-  //           subtitle: 'Incredible games & Endless entertainment',
-  //           default_action: {
-  //             type: 'web_url',
-  //             url: 'https://bit.ly/webPlaystation',
-  //             webview_height_ratio: 'tall',
-  //           },
-  //           buttons: [
-  //             {
-  //               type: 'web_url',
-  //               url: 'https://bit.ly/webPlaystation',
-  //               title: 'View on Website',
-  //             },
-  //             {
-  //               type: 'postback',
-  //               title: 'Show Playstation',
-  //               payload: 'SHOW_PLAYSTATION',
-  //             },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //   },
-  // };
 };
