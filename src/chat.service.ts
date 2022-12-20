@@ -110,7 +110,7 @@ export class ChatService {
   }
 
   async backToProducts(sender_psid: any): Promise<any> {
-    this.sendProducts(sender_psid);
+    await this.sendProducts(sender_psid);
   }
 
   async sendLookupOrder(sender_psid: any): Promise<any> {}
