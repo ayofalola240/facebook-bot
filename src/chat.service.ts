@@ -111,14 +111,14 @@ export class ChatService {
   }
   async sendCart(sender_psid: any, payload: any): Promise<any> {
     const productID = payload.split('_')[1];
-
-    const response = 'Product added to cart';
+    const response = {
+      text: 'Product added to cart',
+    };
     const body = {
       userId: sender_psid,
       date: moment().format(),
       products: [{ productId: productID, quantity: 1 }],
     };
-    console.log(body);
     try {
       await axios({
         url: 'https://fakestoreapi.com/carts',
