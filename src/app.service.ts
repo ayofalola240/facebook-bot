@@ -233,7 +233,7 @@ export class AppService {
         sender_action: 'typing_on',
       };
 
-      const res = await axios({
+      await axios({
         method: 'POST',
         url: 'https://graph.facebook.com/v2.6/me/messages',
         headers: {

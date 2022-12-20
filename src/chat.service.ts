@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { AppService } from './app.service';
 import * as Templetes from './utils/messageTemplete';
 import axios from 'axios';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Injectable()
 export class ChatService {
@@ -111,6 +111,7 @@ export class ChatService {
   }
   async sendCart(sender_psid: any, payload: any): Promise<any> {
     const productID = payload.split('_')[1];
+
     const response = 'Product added to cart';
     const body = {
       userId: sender_psid,
