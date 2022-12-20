@@ -154,6 +154,9 @@ export class AppService {
     if (payload.split('_')[0] === 'PRODUCT') {
       return this.chatService.sendProduct(sender_psid, payload);
     }
+    if (payload.split('_')[0] === 'CART') {
+      return this.chatService.sendCart(sender_psid, payload);
+    }
     switch (payload) {
       case 'GET_STARTED':
       case 'RESTART_CONVERSATION':
@@ -161,7 +164,7 @@ export class AppService {
         break;
       case 'TALK_AGENT':
         await this.chatService.requestTalkToAgent(sender_psid);
-      case 'BACK_TO_CATEGORIES':
+      case 'BACK_TO_PRODUCTS':
         await this.chatService.backToProducts(sender_psid);
         break;
 

@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { AppService } from './app.service';
 import * as Templetes from './utils/messageTemplete';
 import axios from 'axios';
+import moment from 'moment';
 
 @Injectable()
 export class ChatService {
@@ -108,7 +109,30 @@ export class ChatService {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
   }
-
+  async sendCart(sender_psid: any, payload: any): Promise<any> {
+    const productID = payload.split('_')[1];
+    const response = 'Product added to cart';
+    const body = {
+      userId: sender_psid,
+      date: moment().format(),
+      products: [{ productId: productID, quantity: 1 }],
+    };
+    console.log(body);
+    try {
+      await axios({
+        url: 'https://fakestoreapi.com/carts',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept-Encoding': '*',
+        },
+        data: body,
+      });
+      await this.sendMessage(sender_psid, response);
+    } catch (error) {
+      console.log(`An error occur ${JSON.stringify(error)}`);
+    }
+  }
   async backToProducts(sender_psid: any): Promise<any> {
     await this.sendProducts(sender_psid);
   }
