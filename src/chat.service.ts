@@ -99,6 +99,20 @@ export class ChatService {
     }
   }
 
+  async sendProduct(sender_psid: any, payload: any): Promise<any> {
+    const productID = payload.split('_')[1];
+    try {
+      const response = await Templetes.sendProductTemplate(productID);
+      await this.sendMessage(sender_psid, response);
+    } catch (error) {
+      console.log(`An error occur ${JSON.stringify(error)}`);
+    }
+  }
+
+  async backToProducts(sender_psid: any): Promise<any> {
+    this.sendProducts(sender_psid);
+  }
+
   async sendLookupOrder(sender_psid: any): Promise<any> {}
   async requestTalkToAgent(sender_psid: any): Promise<any> {}
 }

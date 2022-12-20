@@ -81,6 +81,8 @@ export class AppService {
         const payload = received_message.quick_reply.payload;
         if (payload === 'PRODUCTS') {
           await this.chatService.sendProducts(sender_psid);
+        } else if (payload.split('_')[0] === 'PRODUCT') {
+          await this.chatService.sendProduct(sender_psid, payload);
         } else if (payload === 'LOOKUP_ORDER') {
           await this.chatService.sendLookupOrder(sender_psid);
         } else if (payload === 'TALK_AGENT') {
@@ -148,21 +150,20 @@ export class AppService {
   }
   // Handles messaging_postbacks events
   async handlePostback(sender_psid: any, received_postback: any): Promise<any> {
-    let response = {};
-
     // Get the payload for the postback
     const payload = received_postback.payload;
 
     switch (payload) {
-      case 'yes':
-        response = { text: 'Thanks!' };
-        break;
-      case 'no':
-        response = { text: 'Oops, try sending another image.' };
-        break;
       case 'GET_STARTED':
+      case 'RESTART_CONVERSATION':
         await this.chatService.sendWelcomeMessage(sender_psid);
         break;
+      case 'TALK_AGENT':
+        await this.chatService.requestTalkToAgent(sender_psid);
+      case 'BACK_TO_CATEGORIES':
+        await this.chatService.backToProducts(sender_psid);
+        break;
+
       default:
         console.log('run default switch case');
     }
@@ -250,7 +251,7 @@ export class AppService {
         sender_action: 'mark_seen',
       };
 
-      const res = await axios({
+      await axios({
         method: 'POST',
         url: 'https://graph.facebook.com/v2.6/me/messages',
         headers: {
