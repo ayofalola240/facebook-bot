@@ -81,8 +81,6 @@ export class AppService {
         const payload = received_message.quick_reply.payload;
         if (payload === 'PRODUCTS') {
           await this.chatService.sendProducts(sender_psid);
-        } else if (payload.split('_')[0] === 'PRODUCT') {
-          await this.chatService.sendProduct(sender_psid, payload);
         } else if (payload === 'LOOKUP_ORDER') {
           await this.chatService.sendLookupOrder(sender_psid);
         } else if (payload === 'TALK_AGENT') {
@@ -152,7 +150,10 @@ export class AppService {
   async handlePostback(sender_psid: any, received_postback: any): Promise<any> {
     // Get the payload for the postback
     const payload = received_postback.payload;
-
+    console.log(payload);
+    if (payload.split('_')[0] === 'PRODUCT') {
+      return this.chatService.sendProduct(sender_psid, payload);
+    }
     switch (payload) {
       case 'GET_STARTED':
       case 'RESTART_CONVERSATION':
