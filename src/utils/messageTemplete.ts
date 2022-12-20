@@ -28,11 +28,6 @@ export const sendProductsTemplate = async () => {
         },
         buttons: [
           {
-            type: 'web_url',
-            url: 'https://bit.ly/webHeadphones',
-            title: 'Add to cart',
-          },
-          {
             type: 'postback',
             title: 'View Product',
             payload: `PRODUCT_${product.id}`,
@@ -85,11 +80,6 @@ export const sendProductTemplate = async (productId: any) => {
               url: `https://fakestoreapi.com/products/${productId}`,
             },
             buttons: [
-              {
-                type: 'web_url',
-                url: `https://fakestoreapi.com/products/${productId}`,
-                title: 'Learn More',
-              },
               {
                 type: 'postback',
                 title: 'Add to Cart',
