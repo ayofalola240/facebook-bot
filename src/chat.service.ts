@@ -50,20 +50,10 @@ export class ChatService {
         text: `Hi ${username}! welcome to my clothing shop.`,
       };
 
-      //send an image
       const response2 = {
-        attachment: {
-          type: 'image',
-          payload: {
-            url: 'https://bit.ly/imageWelcome',
-          },
-        },
-      };
-
-      const response3 = {
         text: 'At any time, use the menu below to navigate through the features.',
       };
-      const response4 = {
+      const response3 = {
         text: 'What can I do to help you today?',
         quick_replies: [
           {
@@ -71,22 +61,11 @@ export class ChatService {
             title: 'Products',
             payload: 'PRODUCTS',
           },
-          {
-            content_type: 'text',
-            title: 'Lookup Order',
-            payload: 'LOOKUP_ORDER',
-          },
-          {
-            content_type: 'text',
-            title: 'Talk to an agent',
-            payload: 'TALK_AGENT',
-          },
         ],
       };
       await this.sendMessage(sender_psid, response1);
       await this.sendMessage(sender_psid, response2);
       await this.sendMessage(sender_psid, response3);
-      await this.sendMessage(sender_psid, response4);
     } catch (error) {
       console.log(`An error occur ${JSON.stringify(error)}`);
     }
@@ -137,7 +116,4 @@ export class ChatService {
   async backToProducts(sender_psid: any): Promise<any> {
     await this.sendProducts(sender_psid);
   }
-
-  async sendLookupOrder(sender_psid: any): Promise<any> {}
-  async requestTalkToAgent(sender_psid: any): Promise<any> {}
 }

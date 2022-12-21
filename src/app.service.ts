@@ -81,10 +81,6 @@ export class AppService {
         const payload = received_message.quick_reply.payload;
         if (payload === 'PRODUCTS') {
           await this.chatService.sendProducts(sender_psid);
-        } else if (payload === 'LOOKUP_ORDER') {
-          await this.chatService.sendLookupOrder(sender_psid);
-        } else if (payload === 'TALK_AGENT') {
-          await this.chatService.requestTalkToAgent(sender_psid);
         }
         return;
       }
@@ -162,8 +158,6 @@ export class AppService {
       case 'RESTART_CONVERSATION':
         await this.chatService.sendWelcomeMessage(sender_psid);
         break;
-      case 'TALK_AGENT':
-        await this.chatService.requestTalkToAgent(sender_psid);
       case 'BACK_TO_PRODUCTS':
         await this.chatService.backToProducts(sender_psid);
         break;
